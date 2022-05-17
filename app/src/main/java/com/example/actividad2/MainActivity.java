@@ -8,6 +8,9 @@ import android.os.Bundle;
  Comentado por Miguel Ángel Cifredo Campos
  */
 
+/*
+ * David
+ */
 public class MainActivity extends AppCompatActivity {
 
     @Override
