@@ -101,13 +101,12 @@ class Model(private val moviesDataStore: DataStore<MovieStore>, private val disn
 
     private val _movies = MutableStateFlow<List<Movie>>(listOf())
     val movies = _movies as StateFlow<List<Movie>>
-    var moviesFromJson = listOf<Movie>()
 
     init {
 
         coroutineScope.launch {
             d { "loadData...start" }
-            moviesFromJson = disneyService.loadMovies()
+            val moviesFromJson = disneyService.loadMovies()
             d { "Movies actually downloaded now: $movies" }
             d { "loadData...end" }
 
@@ -116,7 +115,7 @@ class Model(private val moviesDataStore: DataStore<MovieStore>, private val disn
                 .filter { !it }
                 .first {
                     d { "Initialize data store..." }
-                    initDataStore()
+                    initDataStore(moviesFromJson)
                     return@first true
                 }
         }
@@ -134,7 +133,7 @@ class Model(private val moviesDataStore: DataStore<MovieStore>, private val disn
 
     }
 
-    private fun initDataStore() {
+    private fun initDataStore(moviesFromJson: List<Movie>) {
         // create moshi parser
         val moshi = Moshi.Builder()
             .add(KotlinJsonAdapterFactory())
@@ -173,14 +172,5 @@ class Model(private val moviesDataStore: DataStore<MovieStore>, private val disn
                     .build()
             }
         }
-    }
-
-    fun loadData() {
-        d { "loadData...start" }
-        coroutineScope.launch {
-            moviesFromJson = disneyService.loadMovies()
-            d { "Movies actually downloaded now: $movies" }
-        }
-        d { "loadData...end" }
     }
 }
