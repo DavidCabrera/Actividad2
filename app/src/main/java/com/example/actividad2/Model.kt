@@ -8,7 +8,7 @@ import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.*
 
-class Model(private val moviesDataStore: DataStore<MovieStore>) {
+class Model(private val moviesDataStore: DataStore<MovieStore>, private val disneyService: DisneyInterface) {
 
     companion object {
         val MOVIES = """
@@ -101,10 +101,16 @@ class Model(private val moviesDataStore: DataStore<MovieStore>) {
 
     private val _movies = MutableStateFlow<List<Movie>>(listOf())
     val movies = _movies as StateFlow<List<Movie>>
+    var moviesFromJson = listOf<Movie>()
 
     init {
+
         coroutineScope.launch {
-            //TODO 10 use the moviesDataSTore as will (with coroutines)
+            d { "loadData...start" }
+            moviesFromJson = disneyService.loadMovies()
+            d { "Movies actually downloaded now: $movies" }
+            d { "loadData...end" }
+
             moviesDataStore.data
                 .map { it.initialized }
                 .filter { !it }
@@ -137,7 +143,7 @@ class Model(private val moviesDataStore: DataStore<MovieStore>) {
         val adapter = moshi.adapter<List<Movie>>(type)
 
         // read the json
-        val moviesFromJson: List<Movie> = adapter.fromJson(Model.MOVIES)!!
+        //val moviesFromJson: List<Movie> = adapter.fromJson(moviesData)!!
 
         // create the storedMovies list
         val moviesToStore = moviesFromJson.map { it.asStoredMovie() }
@@ -169,4 +175,12 @@ class Model(private val moviesDataStore: DataStore<MovieStore>) {
         }
     }
 
+    fun loadData() {
+        d { "loadData...start" }
+        coroutineScope.launch {
+            moviesFromJson = disneyService.loadMovies()
+            d { "Movies actually downloaded now: $movies" }
+        }
+        d { "loadData...end" }
+    }
 }

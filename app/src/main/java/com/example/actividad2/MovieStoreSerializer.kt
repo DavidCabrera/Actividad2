@@ -6,7 +6,6 @@ import com.google.protobuf.InvalidProtocolBufferException
 import java.io.InputStream
 import java.io.OutputStream
 
-//TODO 6 create the serializer (proto datastore)
 object MovieStoreSerializer : Serializer<MovieStore> {
     override val defaultValue: MovieStore = MovieStore.getDefaultInstance()
 

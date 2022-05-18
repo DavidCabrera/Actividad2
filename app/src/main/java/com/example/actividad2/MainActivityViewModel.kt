@@ -12,4 +12,8 @@ class MainActivityViewModel(application: Application, val model: Model) :
         model.removeMovie(movie)
     }
 
+    fun loadData() {
+        model.loadData()
+    }
+
 }
