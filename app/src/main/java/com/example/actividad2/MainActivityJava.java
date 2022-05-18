@@ -6,9 +6,9 @@ import android.os.Bundle;
 import android.widget.Button;
 
 
-public class MainActivityJava extends AppCompatActivity {
+public class MainActivityJava /*extends AppCompatActivity*/ {
 
-    private MainActivityViewModel viewModel;
+    /*private MainActivityViewModel viewModel;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -17,5 +17,5 @@ public class MainActivityJava extends AppCompatActivity {
 
         //findViewById(R.id.loadButton).setOnClickListener({viewModel.loadData()});
 
-    }
+    }*/
 }
