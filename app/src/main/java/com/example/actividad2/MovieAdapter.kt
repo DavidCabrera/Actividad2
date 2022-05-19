@@ -12,17 +12,20 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.github.ajalt.timberkt.d
 import com.squareup.picasso.Picasso
+import android.content.Intent
 
 class MovieAdapter(
     val movieSelected: (Movie) -> Unit,
     val removeMovie: (Movie) -> Unit,
+    val displayMovie: (Movie) -> Unit,
 ) :
     ListAdapter<Movie, MovieAdapter.MovieViewHolder>(MovieDiffCallback) {
 
     class MovieViewHolder(
         view: View,
         movieSelected: (Int) -> Unit,
-        removeMovie: (Int) -> Unit
+        removeMovie: (Int) -> Unit,
+        displayMovie: (Int) -> Unit
     ) :
         RecyclerView.ViewHolder(view) {
         private val nameTextView: TextView = view.findViewById(R.id.movieName)
@@ -35,6 +38,10 @@ class MovieAdapter(
             removeButton.setOnClickListener {
                 d { "Remove movie...." }
                 removeMovie(adapterPosition)
+            }
+            movieImage.setOnClickListener{
+                d { "Display movie...." }
+                displayMovie(adapterPosition)
             }
         }
 
@@ -56,7 +63,8 @@ class MovieAdapter(
         return MovieViewHolder(
             view,
             { movieSelected(getItem(it)) },
-            { removeMovie(getItem(it)) }
+            { removeMovie(getItem(it)) },
+            { displayMovie(getItem(it)) }
         )
     }
 

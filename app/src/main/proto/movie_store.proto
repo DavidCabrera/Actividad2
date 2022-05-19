@@ -14,4 +14,7 @@ message StoredMovie{
   string name = 2;
   string release = 3;
   string posterUrl = 4;
+  string playtime = 5;
+  string description = 6;
+  string gif = 7;
 }

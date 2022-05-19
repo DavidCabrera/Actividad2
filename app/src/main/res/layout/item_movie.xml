@@ -25,6 +25,7 @@
             app:layout_constraintStart_toStartOf="parent"
             tools:text="Andean Bear" />
 
+        <!--ImageView-->
         <ImageView
             android:id="@+id/movieImage"
             android:layout_width="0dp"

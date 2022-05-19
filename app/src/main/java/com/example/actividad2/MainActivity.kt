@@ -1,7 +1,9 @@
 package com.example.actividad2
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.Button
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.RecyclerView
 import com.github.ajalt.timberkt.d
@@ -26,8 +28,16 @@ class MainActivity : AppCompatActivity() {
             removeMovie = {
                 d { "Remove movie $it !!!" }
                 removeMovie(it)
+            },
+            displayMovie = {
+                d { "Display movie $it !!!" }
+                displayMovie(it)
             }
         )
+
+        /*findViewById<Button>(R.id.movieName).setOnClickListener {
+            startActivity(Intent(this, DetailsActivity::class.java))
+        }*/
 
         // set the adapter
         findViewById<RecyclerView>(R.id.movieList).adapter = movieAdapter
@@ -45,5 +55,14 @@ class MainActivity : AppCompatActivity() {
 
     private fun removeMovie(movie: Movie) {
         viewModel.removeMovie(movie)
+    }
+
+    private fun displayMovie(movie: Movie) {
+        val intent = Intent(this, DetailsActivity::class.java)
+        val  bundle = Bundle()
+        //intent.putExtra("var1", "variable exitosa")
+        intent.putExtra("movie", movie)
+        startActivity(intent)
+        //startActivity(Intent(this, DetailsActivity::class.java));
     }
 }
