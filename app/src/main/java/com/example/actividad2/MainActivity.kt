@@ -35,10 +35,6 @@ class MainActivity : AppCompatActivity() {
             }
         )
 
-        /*findViewById<Button>(R.id.movieName).setOnClickListener {
-            startActivity(Intent(this, DetailsActivity::class.java))
-        }*/
-
         // set the adapter
         findViewById<RecyclerView>(R.id.movieList).adapter = movieAdapter
 
@@ -59,10 +55,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun displayMovie(movie: Movie) {
         val intent = Intent(this, DetailsActivity::class.java)
-        val  bundle = Bundle()
-        //intent.putExtra("var1", "variable exitosa")
         intent.putExtra("movie", movie)
         startActivity(intent)
-        //startActivity(Intent(this, DetailsActivity::class.java));
     }
 }

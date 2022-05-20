@@ -18,15 +18,12 @@ class DetailsActivity : AppCompatActivity() {
 
     private fun incomingEvent() {
         d { "incomingEvent" }
-        var movie = intent.extras?.get("movie") as Movie
-
-        var nombre = findViewById<TextView>(R.id.name)
-        var anio = findViewById<TextView>(R.id.releaseDetail)
-        var posterMovie = findViewById<ImageView>(R.id.poster)
-        var playtime = findViewById<TextView>(R.id.playtime)
-        var description = findViewById<TextView>(R.id.description)
-        d { "playtime" + playtime.toString() }
-        d { "description" + description.toString() }
+        val movie = intent.extras?.get("movie") as Movie
+        val nombre = findViewById<TextView>(R.id.name)
+        val anio = findViewById<TextView>(R.id.releaseDetail)
+        val posterMovie = findViewById<ImageView>(R.id.poster)
+        val playtime = findViewById<TextView>(R.id.playtime)
+        val description = findViewById<TextView>(R.id.description)
         nombre.setText(movie.name)
         anio.setText(movie.release)
         playtime.setText(movie.playtime)

@@ -54,7 +54,7 @@ class App : Application() {
 
 val mainModule = module {
 
-    // retrofit Disney service
+    // retrofit service
     single {
         Retrofit.Builder()
             .baseUrl("https://gist.githubusercontent.com/")
@@ -70,8 +70,6 @@ val mainModule = module {
     }
 
     single { Model(moviesDataStore = get(), disneyService = get()) }
-    // app model
-    //single { Model(disneyService = get()) }
 }
 
 val mainActivity = module {

@@ -47,16 +47,6 @@ class Model(private val moviesDataStore: DataStore<MovieStore>, private val disn
     }
 
     private fun initDataStore(moviesFromJson: List<Movie>) {
-        // create moshi parser
-        val moshi = Moshi.Builder()
-            .add(KotlinJsonAdapterFactory())
-            .build()
-        val type = Types.newParameterizedType(List::class.java, Movie::class.java)
-        val adapter = moshi.adapter<List<Movie>>(type)
-
-        // read the json
-        //val moviesFromJson: List<Movie> = adapter.fromJson(moviesData)!!
-
         // create the storedMovies list
         val moviesToStore = moviesFromJson.map { it.asStoredMovie() }
 
